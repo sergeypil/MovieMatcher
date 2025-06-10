@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template for SNS Topic and SQS Queue.
+
+Resources:
+  EventSNSTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: cqrs-event-topic
+
+  EventSQSQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: cqrs-event-queue
+
+  EventSQSSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Ref EventSNSTopic
+      Protocol: sqs
+      Endpoint: !GetAtt EventSQSQueue.Arn
+
+  SQSPolicy:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      Queues:
+        - !Ref EventSQSQueue
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: "*"
+            Action: "SQS:SendMessage"
+            Resource: !GetAtt EventSQSQueue.Arn
+            Condition:
+              ArnEquals:
+                aws:SourceArn: !Ref EventSNSTopic
+
+Outputs:
+  SNSTopicArn:
+    Description: ARN of the SNS Topic
+    Value: !Ref EventSNSTopic
+
+  SQSQueueUrl:
+    Description: URL of the SQS Queue
+    Value: !Ref EventSQSQueue

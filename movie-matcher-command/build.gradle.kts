@@ -26,6 +26,8 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("software.amazon.awssdk:sns:2.31.59")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("org.postgresql:postgresql")
 	annotationProcessor("org.projectlombok:lombok")

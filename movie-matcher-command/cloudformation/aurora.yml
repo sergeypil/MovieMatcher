@@ -1,0 +1,61 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template for Aurora PostgreSQL DB Cluster.
+
+Resources:
+  AuroraDBCluster:
+    Type: AWS::RDS::DBCluster
+    Properties:
+      Engine: aurora-postgresql
+      EngineVersion: '15.8'
+      DBClusterIdentifier: movie-matcher-cqrs-aurora-cluster
+      MasterUsername: dbadmin
+      MasterUserPassword: !Ref AuroraMasterPassword
+      BackupRetentionPeriod: 7
+      DBSubnetGroupName: !Ref AuroraDBSubnetGroup
+      VpcSecurityGroupIds:
+        - !Ref AuroraSecurityGroup
+      StorageEncrypted: true
+      DatabaseName: MovieMatcher
+      ServerlessV2ScalingConfiguration:
+        MinCapacity: 0.5
+        MaxCapacity: 1.0 
+
+  AuroraDBInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceClass: db.serverless
+      Engine: aurora-postgresql
+      DBClusterIdentifier: !Ref AuroraDBCluster
+      PubliclyAccessible: true
+
+  AuroraDBSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Subnet group for Aurora DB
+      SubnetIds:
+        - subnet-08a19f5b3909e943b
+        - subnet-0989a8ef513a55d5c
+        - subnet-0b89fa821ae3b871b
+      DBSubnetGroupName: aurora-default-subnet-group
+
+  AuroraSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for Aurora DB
+      VpcId: vpc-0ee08b6d2be505c14
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 5432
+          ToPort: 5432
+          CidrIp: 0.0.0.0/0
+
+  AuroraMasterPassword:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: AuroraMasterPassword
+      Description: Master password for Aurora DB
+      GenerateSecretString:
+        SecretStringTemplate: '{"username": "dbadmin"}'
+        GenerateStringKey: "password"
+        PasswordLength: 16
+        ExcludeCharacters: "/@\"'\\"
