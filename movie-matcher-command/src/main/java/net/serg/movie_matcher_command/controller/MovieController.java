@@ -1,6 +1,7 @@
 package net.serg.movie_matcher_command.controller;
 
 import lombok.RequiredArgsConstructor;
+import net.serg.movie_matcher_command.controller.dto.AddMovieResponse;
 import net.serg.movie_matcher_command.service.CommandDispatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/v1/movies")
 @RequiredArgsConstructor
@@ -21,9 +24,11 @@ public class MovieController {
     private final CommandDispatcher commandDispatcher;
 
     @PostMapping
-    public ResponseEntity<String> addMovie(@RequestBody AddMovieCommand command) {
+    public ResponseEntity<AddMovieResponse> addMovie(@RequestBody AddMovieCommand command) {
+        var id = UUID.randomUUID().toString();
+        command.setId(id);
         commandDispatcher.send(command);
-        return new ResponseEntity<>("Movie added successfully!", HttpStatus.CREATED);
+        return new ResponseEntity<>(new AddMovieResponse("Movie added successfully", id), HttpStatus.CREATED);
     }
 
     @PutMapping

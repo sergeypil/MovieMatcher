@@ -14,16 +14,17 @@ public class MovieAggregate extends AggregateRoot {
     private String director;
 
     public MovieAggregate(AddMovieCommand command) {
-        raiseEvent(new MovieAddedEvent(
-            command.getTitle(),
-            command.getGenre(),
-            command.getDirector(),
-            command.getReleaseYear()
-    
-        ));
+        raiseEvent(MovieAddedEvent.builder()
+            .id(command.getId())
+            .title(command.getTitle())
+            .genre(command.getGenre())
+            .director(command.getDirector())
+            .releaseYear(command.getReleaseYear())
+            .build());
     }
 
     public void apply(MovieAddedEvent event) {
+        this.id = event.getId();
         this.title = event.getTitle();
         this.genre = event.getGenre();
         this.releaseYear = event.getReleaseYear();
@@ -54,10 +55,6 @@ public class MovieAggregate extends AggregateRoot {
     }
 
     public void apply(MovieDeletedEvent event) {
-        this.id = null;
-        this.title = null;
-        this.genre = null;
-        this.releaseYear = 0;
-        this.director = null;
+        this.id = event.getId();
     }
 }

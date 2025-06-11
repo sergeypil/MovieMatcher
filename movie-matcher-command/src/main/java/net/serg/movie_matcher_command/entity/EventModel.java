@@ -3,6 +3,7 @@ package net.serg.movie_matcher_command.entity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.AttributeConverter;
+import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Converter;
 import jakarta.persistence.Embedded;
@@ -37,7 +38,7 @@ public class EventModel {
     private int eventVersion;
     private String eventType;
 
-    @Lob
+    @Column(columnDefinition = "TEXT")
     @Convert(converter = BaseEventConverter.class)
     private BaseEvent eventData;
 }

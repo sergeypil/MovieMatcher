@@ -7,5 +7,6 @@ import lombok.experimental.SuperBuilder;
 
 @Data
 @SuperBuilder
+@NoArgsConstructor
 public class MovieDeletedEvent extends BaseEvent{
 }

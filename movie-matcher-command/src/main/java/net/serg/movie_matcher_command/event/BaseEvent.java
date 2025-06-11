@@ -12,13 +12,14 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME, // Используем имя типа для идентификации подклассов
-    include = JsonTypeInfo.As.PROPERTY, // Тип будет храниться как свойство JSON
-    property = "type" // Имя свойства, которое указывает тип
+    use = JsonTypeInfo.Id.NAME, 
+    include = JsonTypeInfo.As.PROPERTY, 
+    property = "type" 
     )
 @JsonSubTypes({
     @JsonSubTypes.Type(value = MovieAddedEvent.class, name = "MovieAddedEvent"),
-    @JsonSubTypes.Type(value = MovieUpdatedEvent.class, name = "MovieUpdatedEvent")
+    @JsonSubTypes.Type(value = MovieUpdatedEvent.class, name = "MovieUpdatedEvent"),
+    @JsonSubTypes.Type(value = MovieDeletedEvent.class, name = "MovieDeletedEvent")
 })
 public abstract class BaseEvent extends Message {
     private int version;
