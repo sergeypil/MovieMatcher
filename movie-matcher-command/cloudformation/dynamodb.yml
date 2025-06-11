@@ -1,26 +1,46 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: CloudFormation template for DynamoDB Table.
+Description: CloudFormation template for DynamoDB table with indexes for Movie.
 
 Resources:
-  QueryDynamoDBTable:
+  MovieTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: cqrs-query-table
+      TableName: movies
       AttributeDefinitions:
-        - AttributeName: PK
-          AttributeType: S
-        - AttributeName: SK
-          AttributeType: S
+        - AttributeName: id
+          AttributeType: S 
+        - AttributeName: genre
+          AttributeType: S 
+        - AttributeName: releaseYear
+          AttributeType: N 
       KeySchema:
-        - AttributeName: PK
-          KeyType: HASH
-        - AttributeName: SK
-          KeyType: RANGE
-      BillingMode: PAY_PER_REQUEST
-      StreamSpecification:
-        StreamViewType: NEW_AND_OLD_IMAGES
+        - AttributeName: id
+          KeyType: HASH 
+      GlobalSecondaryIndexes:
+        - IndexName: GenreIndex
+          KeySchema:
+            - AttributeName: genre
+              KeyType: HASH 
+          Projection:
+            ProjectionType: ALL 
+        - IndexName: ReleaseYearIndex
+          KeySchema:
+            - AttributeName: releaseYear
+              KeyType: HASH 
+          Projection:
+            ProjectionType: ALL 
+      BillingMode: PAY_PER_REQUEST 
+      Tags:
+        - Key: Environment
+          Value: Production
 
 Outputs:
-  DynamoDBTableName:
+  MovieTableName:
     Description: Name of the DynamoDB table
-    Value: !Ref QueryDynamoDBTable
+    Value: !Ref MovieTable
+  GenreIndexName:
+    Description: Name of the GSI for genre
+    Value: GenreIndex
+  ReleaseYearIndexName:
+    Description: Name of the GSI for releaseYear
+    Value: ReleaseYearIndex
