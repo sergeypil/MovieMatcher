@@ -9,5 +9,5 @@ spring:
     show-sql: true
 aws:
   sns:
-    topic-arn: arn:aws:sns:us-east-1:123456789012:MovieMatcherNotifications
+    topic-arn: arn:aws:sns:us-east-1:321721842202:MovieEventsTopic
     region: us-east-1

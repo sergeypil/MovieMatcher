@@ -1,21 +1,17 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: CloudFormation template for SNS and a single FIFO SQS queue for CQRS pattern.
+Description: CloudFormation template for SNS and a single SQS queue for CQRS pattern.
 
 Resources:
   MovieEventsTopic:
     Type: AWS::SNS::Topic
     Properties:
-      TopicName: MovieEventsTopic.fifo
-      FifoTopic: true 
-      ContentBasedDeduplication: true 
+      TopicName: MovieEventsTopic
 
   MovieEventsQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: MovieEventsQueue.fifo
-      FifoQueue: true 
-      ContentBasedDeduplication: true 
-      VisibilityTimeout: 30 
+      QueueName: MovieEventsQueue
+      VisibilityTimeout: 30
       MessageRetentionPeriod: 1209600 
 
   MovieEventsSubscription:
@@ -24,7 +20,7 @@ Resources:
       TopicArn: !Ref MovieEventsTopic
       Protocol: sqs
       Endpoint: !GetAtt MovieEventsQueue.Arn
-      RawMessageDelivery: true 
+      RawMessageDelivery: true
 
   MovieEventsQueuePolicy:
     Type: AWS::SQS::QueuePolicy
@@ -48,9 +44,9 @@ Outputs:
     Value: !Ref MovieEventsTopic
 
   MovieEventsQueueUrl:
-    Description: URL of the SQS FIFO Queue for all movie events
+    Description: URL of the SQS Queue for all movie events
     Value: !Ref MovieEventsQueue
 
   MovieEventsQueueArn:
-    Description: ARN of the SQS FIFO Queue for all movie events
+    Description: ARN of the SQS Queue for all movie events
     Value: !GetAtt MovieEventsQueue.Arn

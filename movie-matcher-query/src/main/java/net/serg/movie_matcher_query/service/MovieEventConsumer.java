@@ -1,5 +1,7 @@
 package net.serg.movie_matcher_query.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import net.serg.movie_matcher_query.event.BaseEvent;
 import net.serg.movie_matcher_query.event.MovieAddedEvent;
@@ -16,7 +18,9 @@ public class MovieEventConsumer {
     private final MovieEventHandler eventHandler;
 
     @JmsListener(destination = "MovieEventsQueue")
-    public void consumeMovieEvents(BaseEvent event) {
+    public void consumeMovieEvents(String message) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        BaseEvent event = objectMapper.readValue(message, BaseEvent.class);
         if (event instanceof MovieAddedEvent) {
             eventHandler.on((MovieAddedEvent) event);
         } else if (event instanceof MovieUpdatedEvent) {

@@ -1,5 +1,6 @@
 package net.serg.movie_matcher_command.service;
 
+import lombok.RequiredArgsConstructor;
 import net.serg.movie_matcher_command.entity.EventModel;
 import net.serg.movie_matcher_command.event.BaseEvent;
 import net.serg.movie_matcher_command.exception.AggregateNotFoundException;
@@ -13,9 +14,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class MovieEventStore implements EventStore {
-    @Autowired
-    private MovieRepository eventStoreRepository;
+
+    private final MovieRepository eventStoreRepository;
+    private final EventProducer eventProducer;
 
     @Override
     public void saveEvents(String aggregateId, Iterable<BaseEvent> events, int expectedVersion) {
@@ -35,7 +38,10 @@ public class MovieEventStore implements EventStore {
                                        .eventType(event.getClass().getTypeName())
                                        .eventData(event)
                                        .build();
-            eventStoreRepository.save(eventModel);
+            EventModel persistedEvent = eventStoreRepository.save(eventModel);
+            if (!persistedEvent.getId().isEmpty()) {
+                eventProducer.produce(event);
+            }
         }
     }
 
