@@ -1,16 +1,15 @@
-package net.serg.movie_matcher_command.service;
+package net.serg.movie_matcher_command.controller.commands;
 
-import net.serg.movie_matcher_command.controller.AddMovieCommand;
-import net.serg.movie_matcher_command.controller.DeleteMovieCommand;
-import net.serg.movie_matcher_command.controller.UpdateMovieCommand;
+import lombok.RequiredArgsConstructor;
 import net.serg.movie_matcher_command.event.MovieAggregate;
-import org.springframework.beans.factory.annotation.Autowired;
+import net.serg.movie_matcher_command.service.EventSourcingHandler;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class MovieCommandHandler implements CommandHandler {
-    @Autowired
-    private EventSourcingHandler<MovieAggregate> eventSourcingHandler;
+    
+    private final EventSourcingHandler<MovieAggregate> eventSourcingHandler;
 
     public void handle(AddMovieCommand command) {
         var aggregate = new MovieAggregate(command);

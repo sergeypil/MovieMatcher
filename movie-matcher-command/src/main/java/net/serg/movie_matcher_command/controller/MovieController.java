@@ -1,9 +1,11 @@
 package net.serg.movie_matcher_command.controller;
 
 import lombok.RequiredArgsConstructor;
+import net.serg.movie_matcher_command.controller.commands.AddMovieCommand;
+import net.serg.movie_matcher_command.controller.commands.DeleteMovieCommand;
+import net.serg.movie_matcher_command.controller.commands.UpdateMovieCommand;
 import net.serg.movie_matcher_command.controller.dto.AddMovieResponse;
 import net.serg.movie_matcher_command.service.CommandDispatcher;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,7 +22,7 @@ import java.util.UUID;
 @RequestMapping("/api/v1/movies")
 @RequiredArgsConstructor
 public class MovieController {
-    @Autowired
+    
     private final CommandDispatcher commandDispatcher;
 
     @PostMapping

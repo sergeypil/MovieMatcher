@@ -1,4 +1,4 @@
-package net.serg.movie_matcher_command.controller;
+package net.serg.movie_matcher_command.controller.commands;
 
 public class DeleteMovieCommand extends BaseCommand {
 

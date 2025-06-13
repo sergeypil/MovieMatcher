@@ -3,7 +3,6 @@ package net.serg.movie_matcher_command.service;
 import lombok.RequiredArgsConstructor;
 import net.serg.movie_matcher_command.event.BaseEvent;
 import net.serg.movie_matcher_command.event.MovieAggregate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;

@@ -1,4 +1,4 @@
-package net.serg.movie_matcher_query.controller;
+package net.serg.movie_matcher_query.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

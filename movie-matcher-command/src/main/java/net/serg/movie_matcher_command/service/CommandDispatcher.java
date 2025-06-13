@@ -1,6 +1,6 @@
 package net.serg.movie_matcher_command.service;
 
-import net.serg.movie_matcher_command.controller.BaseCommand;
+import net.serg.movie_matcher_command.controller.commands.BaseCommand;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;

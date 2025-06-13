@@ -1,4 +1,4 @@
-package net.serg.movie_matcher_command.controller;
+package net.serg.movie_matcher_command.controller.commands;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -3,6 +3,7 @@ package net.serg.movie_matcher_query.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import net.serg.movie_matcher_query.controller.queries.MovieEventHandler;
 import net.serg.movie_matcher_query.event.BaseEvent;
 import net.serg.movie_matcher_query.event.MovieAddedEvent;
 import net.serg.movie_matcher_query.event.MovieDeletedEvent;

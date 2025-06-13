@@ -1,4 +1,4 @@
-package net.serg.movie_matcher_command.service;
+package net.serg.movie_matcher_command.entity;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,7 +15,7 @@ public class BaseEventConverter implements AttributeConverter<BaseEvent, String>
         try {
             return objectMapper.writeValueAsString(attribute);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Error", e);
+            throw new RuntimeException("Error converting BaseEvent to JSON string",  e);
         }
     }
 
@@ -24,7 +24,7 @@ public class BaseEventConverter implements AttributeConverter<BaseEvent, String>
         try {
             return objectMapper.readValue(dbData, BaseEvent.class);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Error", e);
+            throw new RuntimeException("Error converting JSON string to BaseEvent", e);
         }
     }
 }

@@ -1,4 +1,4 @@
-package net.serg.movie_matcher_query.service;
+package net.serg.movie_matcher_query.controller.queries;
 
 import net.serg.movie_matcher_query.event.MovieAddedEvent;
 import net.serg.movie_matcher_query.event.MovieDeletedEvent;

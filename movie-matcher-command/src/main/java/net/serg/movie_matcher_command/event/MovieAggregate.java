@@ -1,9 +1,9 @@
 package net.serg.movie_matcher_command.event;
 
 import lombok.NoArgsConstructor;
-import net.serg.movie_matcher_command.controller.AddMovieCommand;
-import net.serg.movie_matcher_command.controller.DeleteMovieCommand;
-import net.serg.movie_matcher_command.controller.UpdateMovieCommand;
+import net.serg.movie_matcher_command.controller.commands.AddMovieCommand;
+import net.serg.movie_matcher_command.controller.commands.DeleteMovieCommand;
+import net.serg.movie_matcher_command.controller.commands.UpdateMovieCommand;
 import net.serg.movie_matcher_command.service.AggregateRoot;
 
 @NoArgsConstructor

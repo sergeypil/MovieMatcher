@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import net.serg.movie_matcher_query.entity.BaseEntity;
 import net.serg.movie_matcher_query.entity.MovieEntity;
 import net.serg.movie_matcher_query.repository.MovieRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

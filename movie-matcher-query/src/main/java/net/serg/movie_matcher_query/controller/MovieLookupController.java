@@ -1,12 +1,13 @@
 package net.serg.movie_matcher_query.controller;
 
+import lombok.RequiredArgsConstructor;
+import net.serg.movie_matcher_query.controller.dto.MovieLookupResponse;
 import net.serg.movie_matcher_query.controller.queries.FindAllMoviesQuery;
 import net.serg.movie_matcher_query.controller.queries.FindMovieByIdQuery;
 import net.serg.movie_matcher_query.controller.queries.FindMoviesByGenreQuery;
 import net.serg.movie_matcher_query.controller.queries.FindMoviesByYearQuery;
 import net.serg.movie_matcher_query.entity.MovieEntity;
 import net.serg.movie_matcher_query.service.QueryDispatcher;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +19,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/v1/movieLookup")
+@RequiredArgsConstructor
 public class MovieLookupController {
-
-    @Autowired
-    private QueryDispatcher queryDispatcher;
+    
+    private final QueryDispatcher queryDispatcher;
 
     @GetMapping("/")
     public ResponseEntity<MovieLookupResponse> getAllMovies() {

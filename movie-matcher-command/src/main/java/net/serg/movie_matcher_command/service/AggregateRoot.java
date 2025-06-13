@@ -8,7 +8,6 @@ import net.serg.movie_matcher_command.event.BaseEvent;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 @Getter
 @Setter

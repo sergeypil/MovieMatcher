@@ -12,8 +12,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME, 
-    include = JsonTypeInfo.As.PROPERTY, 
+    use = JsonTypeInfo.Id.NAME,
     property = "type" 
     )
 @JsonSubTypes({

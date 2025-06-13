@@ -6,7 +6,6 @@ import net.serg.movie_matcher_command.event.BaseEvent;
 import net.serg.movie_matcher_command.exception.AggregateNotFoundException;
 import net.serg.movie_matcher_command.exception.ConcurrencyException;
 import net.serg.movie_matcher_command.repository.MovieRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

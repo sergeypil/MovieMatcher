@@ -1,8 +1,8 @@
 package net.serg.movie_matcher_query.controller;
 
+import lombok.RequiredArgsConstructor;
 import net.serg.movie_matcher_query.entity.MovieEntity;
 import net.serg.movie_matcher_query.repository.MovieRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,10 +17,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/util")
+@RequiredArgsConstructor
 public class UtilController {
-
-    @Autowired
-    private MovieRepository movieRepository;
+    
+    private final MovieRepository movieRepository;
     
     @PostMapping("/movies")
     public ResponseEntity<String> saveMovie(@RequestBody MovieEntity movie) {
