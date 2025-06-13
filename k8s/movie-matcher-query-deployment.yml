@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: movie-matcher-query
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: movie-matcher-query
+  template:
+    metadata:
+      labels:
+        app: movie-matcher-query
+    spec:
+      serviceAccountName: movie-matcher-query-service-account
+      containers:
+      - name: movie-matcher-query
+        image: 321721842202.dkr.ecr.us-east-1.amazonaws.com/movie-matcher-query:latest
+        ports:
+        - containerPort: 8081
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: movie-matcher-query
+spec:
+  selector:
+    app: movie-matcher-query
+  ports:
+  - protocol: TCP
+    port: 8081
+    targetPort: 8081
+  type: LoadBalancer
