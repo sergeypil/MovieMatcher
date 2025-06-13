@@ -16,6 +16,7 @@ Resources:
         - !Ref AuroraSecurityGroup
       StorageEncrypted: true
       DatabaseName: MovieMatcher
+      Port: 5432
       ServerlessV2ScalingConfiguration:
         MinCapacity: 0.5
         MaxCapacity: 1.0 

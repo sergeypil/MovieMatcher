@@ -24,9 +24,13 @@ repositories {
 }
 
 dependencies {
+	implementation("jakarta.jms:jakarta.jms-api:3.0.0")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("software.amazon.awssdk:sqs:2.31.60")
 	implementation("software.amazon.awssdk:dynamodb-enhanced:2.31.60")
+	implementation("software.amazon.awssdk:sts:2.31.60")
 	implementation("org.springframework:spring-jms:6.2.7")
+	implementation("com.amazonaws:aws-java-sdk-sts:1.12.785")
 	implementation("com.amazonaws:amazon-sqs-java-messaging-lib:2.1.0")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
 	compileOnly("org.projectlombok:lombok")

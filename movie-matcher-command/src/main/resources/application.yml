@@ -1,8 +1,11 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/moviematcher
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://movie-matcher-aurora-stack3-auroradbinstance-pmmncmb2df8s.cg65hppnq0la.us-east-1.rds.amazonaws.com:5432/MovieMatcher
+    username: dbadmin
+    password: 
+#    url: jdbc:postgresql://localhost:5432/moviematcher
+#    username: postgres
+#    password: postgres
   jpa:
     hibernate:
       ddl-auto: update
